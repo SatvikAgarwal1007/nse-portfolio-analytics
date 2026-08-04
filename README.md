@@ -108,6 +108,6 @@ Portfolio weights are read from `holdings.csv` if present, and otherwise fall ba
 
 ---
 
-## Next
+## 04-08-2026
 
-This is the data and risk layer of a larger project. The same price pipeline feeds a backtesting engine, where the risk measures above become the evaluation framework for a strategy rather than a description of a static book.
+Backtested over Aug 2025 – Aug 2026, the current basket returns −9.3% with a maximum drawdown of 28.0% (trough 30 Mar 2026), against the Nifty 50's -0.7% over the same period. This is descriptive, not predictive — the holdings were selected in Aug 2026 with full knowledge of the period tested, and two constituents were not listed for most of it.
