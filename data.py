@@ -54,3 +54,24 @@ b = pd.Series(betas)
 portfolio_beta = (weights * b).sum()
 print(f"Portfolio beta: {portfolio_beta:.2f}")
 print(f"If Nifty falls 10%, portfolio falls ~{portfolio_beta * 10:.1f}%")
+
+#portfolio daily returns: weighted average of individual stock returns
+portfolio_returns = (returns * weights).sum(axis=1)
+
+#compound into growth curve starting at 1:
+curve = (1 + portfolio_returns).cumprod()
+
+#running high water mark: the maximum value of the curve up to that point
+peak = curve.cummax()
+
+#drawdown: how far below the peak at every point
+drawdown = curve/peak - 1
+print("total return:", round((curve.iloc[-1] - 1) * 100, 1), "%")
+print("worst drawdown:", round(drawdown.min() * 100, 1), "%")
+print("date of worst drawdown:", drawdown.idxmin().date())
+
+nifty_curve = (1 + market_returns.dropna()).cumprod()
+nifty_dd = (nifty_curve / nifty_curve.cummax() - 1)
+
+print("Nifty return:", round((nifty_curve.iloc[-1] - 1) * 100, 1), "%")
+print("Nifty worst drawdown:", round(nifty_dd.min() * 100, 1), "%")
